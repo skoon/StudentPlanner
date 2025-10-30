@@ -1,5 +1,3 @@
-# Firebase Studio
+# Student Planner Pro
 
-This is a NextJS starter in Firebase Studio.
-
-To get started, take a look at src/app/page.tsx.
+A website that helps high school students keep track of their assignments, tests, projects, and other work, with AI-powered task prioritization.
