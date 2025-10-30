@@ -5,6 +5,7 @@ import type { Task } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
+import { DayContent, DayProps } from 'react-day-picker';
 
 interface CalendarViewProps {
   tasks: Task[];
@@ -21,23 +22,13 @@ export function CalendarView({ tasks, selectedDate, onDateSelect }: CalendarView
     hasTask: taskDates,
   };
 
-  const modifiersStyles = {
-    hasTask: {
-        position: 'relative',
-        
-    },
-  };
-
-  const CustomDay = (dayProps: any) => {
-    const { date, displayMonth } = dayProps;
-    if (!displayMonth) return <></>;
-    
-    const isTaskDay = taskDates.some(taskDate => format(taskDate, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd'));
+  const CustomDay = (props: DayProps) => {
+    const isTaskDay = taskDates.some(taskDate => format(taskDate, 'yyyy-MM-dd') === format(props.date, 'yyyy-MM-dd'));
 
     return (
-        <div className="relative">
-            {dayProps.children}
-            {isTaskDay && <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />}
+        <div className="relative flex justify-center items-center h-full">
+            <DayContent {...props} />
+            {isTaskDay && <div className="absolute bottom-1 w-1 h-1 rounded-full bg-primary" />}
         </div>
     );
   }
@@ -53,7 +44,6 @@ export function CalendarView({ tasks, selectedDate, onDateSelect }: CalendarView
           selected={selectedDate}
           onSelect={onDateSelect}
           modifiers={modifiers}
-          modifiersClassNames={{ hasTask: 'has-task' }}
           components={{ DayContent: CustomDay }}
         />
       </CardContent>
