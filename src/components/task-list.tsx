@@ -46,7 +46,7 @@ export function TaskList({ tasks, onEditTask, onDeleteTask, onToggleComplete }: 
       <Card key={task.id} className={cn(
         "transition-all",
         task.completed ? 'bg-muted/50' : getSubjectBgColor(task.subject),
-        isOverdue && 'border-destructive/50'
+        isOverdue && !task.completed && 'border-destructive/50'
       )}>
         <CardHeader className="flex flex-row items-start justify-between gap-4 p-4">
           <div className="flex items-start gap-4">
