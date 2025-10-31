@@ -41,6 +41,13 @@ body {
     --sidebar-accent-foreground: 210 10% 15%;
     --sidebar-border: 210 8% 80%;
     --sidebar-ring: 210 40% 60%;
+
+    --subject-math: 25 95% 53%;
+    --subject-science: 142 71% 45%;
+    --subject-history: 35 100% 50%;
+    --subject-english: 217 91% 60%;
+    --subject-art: 322 84% 50%;
+    --subject-other: 240 5% 65%;
   }
   .dark {
     --background: 210 10% 10%;
@@ -75,6 +82,13 @@ body {
     --sidebar-accent-foreground: 210 8% 98%;
     --sidebar-border: 210 10% 25%;
     --sidebar-ring: 210 40% 60%;
+
+    --subject-math: 25 95% 43%;
+    --subject-science: 142 71% 35%;
+    --subject-history: 35 100% 40%;
+    --subject-english: 217 91% 50%;
+    --subject-art: 322 84% 40%;
+    --subject-other: 240 5% 55%;
   }
 }
 

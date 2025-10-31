@@ -65,6 +65,14 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        subject: {
+          math: 'hsl(var(--subject-math))',
+          science: 'hsl(var(--subject-science))',
+          history: 'hsl(var(--subject-history))',
+          english: 'hsl(var(--subject-english))',
+          art: 'hsl(var(--subject-art))',
+          other: 'hsl(var(--subject-other))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

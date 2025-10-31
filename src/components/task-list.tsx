@@ -10,7 +10,7 @@ import { format, isPast, isToday } from 'date-fns';
 import { Badge } from './ui/badge';
 import { getSubjectIcon } from './icons';
 import { Separator } from './ui/separator';
-import { cn } from '@/lib/utils';
+import { cn, getSubjectColor, getSubjectBgColor } from '@/lib/utils';
 
 interface TaskListProps {
   tasks: Task[];
@@ -43,14 +43,18 @@ export function TaskList({ tasks, onEditTask, onDeleteTask, onToggleComplete }: 
     const isDueToday = isToday(task.dueDate);
     
     return (
-      <Card key={task.id} className={cn("transition-all", task.completed && 'bg-muted/50', isOverdue && 'border-destructive/50')}>
+      <Card key={task.id} className={cn(
+        "transition-all",
+        task.completed ? 'bg-muted/50' : getSubjectBgColor(task.subject),
+        isOverdue && 'border-destructive/50'
+      )}>
         <CardHeader className="flex flex-row items-start justify-between gap-4 p-4">
           <div className="flex items-start gap-4">
             <Checkbox
               id={`task-${task.id}`}
               checked={task.completed}
               onCheckedChange={() => onToggleComplete(task.id)}
-              className="mt-1"
+              className={cn("mt-1", task.completed ? '' : getSubjectColor(task.subject))}
             />
             <div className="grid gap-1">
               <CardTitle className={cn("text-lg", task.completed && 'text-muted-foreground line-through')}>

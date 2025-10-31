@@ -1,14 +1,18 @@
+import * as React from 'react';
 import { Book, FlaskConical, History, Palette, Sigma, Star } from 'lucide-react';
+import { getSubjectColor } from '@/lib/utils';
 
 export const subjectIcons: { [key: string]: React.ReactElement } = {
-  Math: <Sigma className="h-4 w-4 text-primary" />,
-  Science: <FlaskConical className="h-4 w-4 text-primary" />,
-  History: <History className="h-4 w-4 text-primary" />,
-  English: <Book className="h-4 w-4 text-primary" />,
-  Art: <Palette className="h-4 w-4 text-primary" />,
-  Other: <Star className="h-4 w-4 text-primary" />,
+  Math: <Sigma className="h-4 w-4" />,
+  Science: <FlaskConical className="h-4 w-4" />,
+  History: <History className="h-4 w-4" />,
+  English: <Book className="h-4 w-4" />,
+  Art: <Palette className="h-4 w-4" />,
+  Other: <Star className="h-4 w-4" />,
 };
 
 export const getSubjectIcon = (subject: string): React.ReactElement => {
-  return subjectIcons[subject] || <Star className="h-4 w-4 text-primary" />;
+  const icon = subjectIcons[subject] || <Star className="h-4 w-4" />;
+  const colorClass = getSubjectColor(subject);
+  return React.cloneElement(icon, { className: `h-4 w-4 ${colorClass}` });
 };
