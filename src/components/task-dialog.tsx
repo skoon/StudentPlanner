@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, ControllerRenderProps } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { format } from 'date-fns';
@@ -112,7 +112,7 @@ export function TaskDialog({ isOpen, setIsOpen, onSave, task }: TaskDialogProps)
               <FormField
                 control={form.control}
                 name="type"
-                render={({ field }) => (
+                render={({ field }: { field: ControllerRenderProps<FormValues, 'type'> }) => (
                   <FormItem>
                     <FormLabel>Type</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
