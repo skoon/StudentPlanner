@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Task } from '@/lib/types';
 import { initialTasks } from '@/lib/data';
 import { Button } from '@/components/ui/button';
@@ -18,7 +18,7 @@ export function Dashboard() {
   const [isTaskDialogOpen, setTaskDialogOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | undefined>(undefined);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
-  
+
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [prioritizedTasks, setPrioritizedTasks] = useState<PrioritizedTask[]>([]);
   const [isAiDialogOpen, setIsAiDialogOpen] = useState(false);
@@ -66,6 +66,34 @@ export function Dashboard() {
     }
     setIsAiLoading(false);
   };
+
+  useEffect(() => {
+    const checkReminders = () => {
+      const now = new Date();
+      tasks.forEach((task) => {
+        if (task.reminder && !task.completed) {
+          const reminderTime = new Date(task.reminder);
+          if (
+            reminderTime.getFullYear() === now.getFullYear() &&
+            reminderTime.getMonth() === now.getMonth() &&
+            reminderTime.getDate() === now.getDate() &&
+            reminderTime.getHours() === now.getHours() &&
+            reminderTime.getMinutes() === now.getMinutes()
+          ) {
+            toast({
+              title: "Reminder",
+              description: `It's time for: ${task.name}`,
+            });
+          }
+        }
+      });
+    };
+
+    const intervalId = setInterval(checkReminders, 60000);
+    checkReminders();
+
+    return () => clearInterval(intervalId);
+  }, [tasks, toast]);
 
   return (
     <div className="flex h-full flex-col bg-background">

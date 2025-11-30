@@ -6,6 +6,7 @@ export const taskSchema = z.object({
   subject: z.string().min(1, "Subject is required."),
   type: z.enum(["Assignment", "Test", "Project"]),
   dueDate: z.date({ required_error: "Due date is required." }),
+  reminder: z.date().optional(),
   description: z.string().optional(),
   completed: z.boolean(),
 });
